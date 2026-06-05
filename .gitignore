@@ -1,1 +1,9 @@
-.gopath/ 
+.gopath/
+node_modules/
+.env
+.env.local
+.next/
+out/
+dist/
+*.pem
+*.log

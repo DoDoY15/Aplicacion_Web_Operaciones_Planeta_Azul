@@ -1,7 +1,8 @@
 import type { Item, User, Area, Notification, LoginResponse } from '@/types'
 
-const BASE = '/api/v1'
-const AUTH = '/auth'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
+const BASE = `${API_URL}/api/v1`
+const AUTH = `${API_URL}/auth`
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
