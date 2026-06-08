@@ -10,6 +10,8 @@ import {
 } from 'lucide-react'
 import { ROLE_LABELS } from '@/types'
 
+export const runtime = 'edge'
+
 const NAV = [
   { href: '/dashboard',  icon: LayoutDashboard, label: 'Início',       key: 'dashboard' },
   { href: '/tasks',      icon: ListTodo,        label: 'Tasks',         key: 'tasks' },

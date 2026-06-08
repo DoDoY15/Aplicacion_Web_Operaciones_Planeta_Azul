@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { AuthProvider } from '@/hooks/useAuth'
 
+export const runtime = 'edge'
+
 export const metadata: Metadata = {
   title: 'Planeta Azul — Sistema Industrial',
   description: 'Gestão industrial Planeta Azul',
