@@ -9,6 +9,7 @@ import {
   FileText, ScanSearch, LogOut, Bell, Settings
 } from 'lucide-react'
 import { ROLE_LABELS } from '@/types'
+import { Logo } from '@/components/ui/Logo'
 
 const NAV = [
   { href: '/dashboard',  icon: LayoutDashboard, label: 'Início',       key: 'dashboard' },
@@ -44,16 +45,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <aside className="w-[220px] shrink-0 border-r border-white/[0.06] flex flex-col bg-[#080D12]">
         {/* Logo */}
         <div className="h-16 flex items-center px-5 border-b border-white/[0.06]">
-          <div className="relative w-8 h-8 mr-3">
-            <div className="absolute inset-0 rounded-full border border-brand-cyan/40 animate-spin-slow" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 28 28" fill="none">
-                <circle cx="14" cy="14" r="8" stroke="#00D4FF" strokeWidth="2" fill="none"/>
-                <circle cx="14" cy="14" r="3" fill="#00D4FF" fillOpacity="0.8"/>
-                <path d="M14 2L14 6M14 22L14 26M2 14L6 14M22 14L26 14" stroke="#00D4FF" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </div>
-          </div>
+          <Logo size={32} className="mr-3 rounded-full" />
           <span className="font-display font-bold text-sm text-[#E8EEF4]">Planeta Azul</span>
         </div>
 

@@ -4,7 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 const BASE = `${API_URL}/api/v1`
 const AUTH = `${API_URL}/auth`
 
-async function request<T>(url: string, options?: RequestInit): Promise<T> {
+async function request<T>(url: string, options?: RequestInit, opts?: { skipAuthRedirect?: boolean }): Promise<T> {
   const res = await fetch(url, {
     credentials: 'include',
     headers: { 'Content-Type': 'application/json', ...options?.headers },
@@ -12,10 +12,17 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
   })
 
   if (res.status === 401) {
+    // `me()` is used just to probe the session — let AuthProvider handle the
+    // "not logged in" state instead of forcing a redirect (avoids reload loops
+    // on first load / on the login page itself).
+    if (opts?.skipAuthRedirect) throw new Error('not authenticated')
+
     // Try refresh
     const refreshed = await fetch(`${AUTH}/refresh`, { method: 'POST', credentials: 'include' })
     if (!refreshed.ok) {
-      window.location.href = '/login'
+      if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+        window.location.href = '/login'
+      }
       throw new Error('session expired')
     }
     // Retry original
@@ -35,7 +42,7 @@ export const api = {
 
   logout: () => request(`${AUTH}/logout`, { method: 'POST' }),
 
-  me: () => request<User>(`${BASE}/auth/me`),
+  me: () => request<User>(`${BASE}/auth/me`, undefined, { skipAuthRedirect: true }),
 
   // Items
   items: {

@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
+import { Logo } from '@/components/ui/Logo'
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -35,17 +36,7 @@ export default function LoginPage() {
       <div className="relative w-full max-w-sm animate-fade-in">
         {/* Logo */}
         <div className="flex flex-col items-center mb-10">
-          <div className="relative w-16 h-16 mb-4">
-            <div className="absolute inset-0 rounded-full border-2 border-brand-cyan/40 animate-spin-slow" />
-            <div className="absolute inset-2 rounded-full border border-brand-cyan/20" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                <circle cx="14" cy="14" r="8" stroke="#00D4FF" strokeWidth="1.5" fill="none"/>
-                <circle cx="14" cy="14" r="3" fill="#00D4FF" fillOpacity="0.8"/>
-                <path d="M14 2 L14 6 M14 22 L14 26 M2 14 L6 14 M22 14 L26 14" stroke="#00D4FF" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </div>
-          </div>
+          <Logo size={72} className="mb-4 rounded-full shadow-accent" />
           <h1 className="font-display text-2xl font-bold text-[#E8EEF4] tracking-tight">
             Planeta Azul
           </h1>

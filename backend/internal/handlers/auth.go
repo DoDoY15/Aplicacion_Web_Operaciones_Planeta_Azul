@@ -52,10 +52,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		return
 	}
 
-	// Set httpOnly cookies
-	secureCookie := c.Request.TLS != nil
-	c.SetCookie("access_token", tokens.AccessToken, int(8*time.Hour/time.Second), "/", "", secureCookie, true)
-	c.SetCookie("refresh_token", tokens.RefreshToken, int(7*24*time.Hour/time.Second), "/auth/refresh", "", secureCookie, true)
+	setAuthCookies(c, tokens.AccessToken, tokens.RefreshToken)
 
 	c.JSON(http.StatusOK, models.LoginResponse{
 		AccessToken:  tokens.AccessToken,
@@ -94,9 +91,7 @@ func (h *AuthHandler) Refresh(c *gin.Context) {
 		return
 	}
 
-	secureCookie := c.Request.TLS != nil
-	c.SetCookie("access_token", tokens.AccessToken, int(8*time.Hour/time.Second), "/", "", secureCookie, true)
-	c.SetCookie("refresh_token", tokens.RefreshToken, int(7*24*time.Hour/time.Second), "/auth/refresh", "", secureCookie, true)
+	setAuthCookies(c, tokens.AccessToken, tokens.RefreshToken)
 
 	c.JSON(http.StatusOK, gin.H{
 		"access_token":  tokens.AccessToken,
@@ -106,8 +101,9 @@ func (h *AuthHandler) Refresh(c *gin.Context) {
 
 // POST /auth/logout
 func (h *AuthHandler) Logout(c *gin.Context) {
-	c.SetCookie("access_token", "", -1, "/", "", false, true)
-	c.SetCookie("refresh_token", "", -1, "/auth/refresh", "", false, true)
+	c.SetSameSite(http.SameSiteNoneMode)
+	c.SetCookie("access_token", "", -1, "/", "", true, true)
+	c.SetCookie("refresh_token", "", -1, "/auth/refresh", "", true, true)
 	c.JSON(http.StatusOK, gin.H{"message": "logout realizado"})
 }
 
@@ -127,6 +123,17 @@ func (h *AuthHandler) Me(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, sanitizeUser(user))
+}
+
+// setAuthCookies sets the httpOnly access/refresh cookies with attributes that
+// survive cross-site requests (frontend on Cloudflare, backend on Railway).
+// SameSite=None requires Secure=true — Railway terminates TLS at its edge proxy,
+// so c.Request.TLS is always nil here even though the browser-facing connection
+// is HTTPS; we can't rely on it to detect "secure".
+func setAuthCookies(c *gin.Context, accessToken, refreshToken string) {
+	c.SetSameSite(http.SameSiteNoneMode)
+	c.SetCookie("access_token", accessToken, int(8*time.Hour/time.Second), "/", "", true, true)
+	c.SetCookie("refresh_token", refreshToken, int(7*24*time.Hour/time.Second), "/auth/refresh", "", true, true)
 }
 
 func sanitizeUser(u *models.User) *models.User {
