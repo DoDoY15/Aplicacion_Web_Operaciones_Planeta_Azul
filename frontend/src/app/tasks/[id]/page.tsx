@@ -8,8 +8,6 @@ import type { Item, Comment } from '@/types'
 import { STATUS_LABELS, PRIORITY_LABELS } from '@/types'
 import { ArrowLeft, MessageSquare, AlertCircle, ChevronRight, Send } from 'lucide-react'
 
-export const runtime = 'edge'
-
 const STATUS_COLORS: Record<string, string> = {
   draft:       'bg-[#4B5563]/20 text-[#9CA3AF] border-[#4B5563]/30',
   pending:     'bg-[#D97706]/20 text-[#FCD34D] border-[#D97706]/30',

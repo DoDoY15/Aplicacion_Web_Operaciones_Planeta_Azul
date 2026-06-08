@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:cf": "npx @cloudflare/next-on-pages",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "next": "15.5.2",
+    "next": "15.5.7",
     "react": "^19",
     "react-dom": "^19",
     "clsx": "^2.1.1",
@@ -36,8 +37,8 @@
     "postcss": "^8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "15.5.2",
-    "@cloudflare/next-on-pages": "^1.13.12",
-    "wrangler": "^3"
+    "eslint-config-next": "15.5.7",
+    "@opennextjs/cloudflare": "^1.19.11",
+    "wrangler": "^4.98.0"
   }
 }

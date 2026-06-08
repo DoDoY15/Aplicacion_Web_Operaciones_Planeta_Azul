@@ -4,8 +4,6 @@ import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 
-export const runtime = 'edge'
-
 export default function LoginPage() {
   const { login } = useAuth()
   const router = useRouter()

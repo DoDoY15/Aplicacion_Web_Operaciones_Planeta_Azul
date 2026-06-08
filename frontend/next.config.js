@@ -1,3 +1,5 @@
+const { initOpenNextCloudflareForDev } = require('@opennextjs/cloudflare')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
@@ -8,5 +10,7 @@ const nextConfig = {
     ]
   },
 }
+
+initOpenNextCloudflareForDev()
 
 module.exports = nextConfig

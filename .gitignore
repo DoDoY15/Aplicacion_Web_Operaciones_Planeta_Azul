@@ -5,5 +5,8 @@ node_modules/
 .next/
 out/
 dist/
+.open-next/
+.wrangler/
+.vercel/
 *.pem
 *.log

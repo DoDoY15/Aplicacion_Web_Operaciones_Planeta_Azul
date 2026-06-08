@@ -7,8 +7,6 @@ import { STATUS_LABELS, PRIORITY_LABELS } from '@/types'
 import { ListTodo, CheckCircle2, Clock, AlertTriangle, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 
-export const runtime = 'edge'
-
 const STATUS_COLORS: Record<string, string> = {
   draft:       'bg-[#4B5563]/20 text-[#9CA3AF]',
   pending:     'bg-[#D97706]/20 text-[#FCD34D]',
