@@ -4,12 +4,12 @@ import { AuthProvider } from '@/hooks/useAuth'
 
 export const metadata: Metadata = {
   title: 'Planeta Azul — Sistema Industrial',
-  description: 'Gestão industrial Planeta Azul',
+  description: 'Gestión industrial Planeta Azul',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="es">
       <body className="font-body antialiased">
         <AuthProvider>
           {children}

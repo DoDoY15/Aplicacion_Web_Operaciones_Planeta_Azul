@@ -21,7 +21,7 @@ export default function LoginPage() {
       await login(email, password)
       router.push('/dashboard')
     } catch {
-      setError('Credenciais inválidas. Verifique e-mail e senha.')
+      setError('Credenciales inválidas. Verifica el correo electrónico y la contraseña.')
     } finally {
       setLoading(false)
     }
@@ -40,25 +40,25 @@ export default function LoginPage() {
           <h1 className="font-display text-2xl font-bold text-[#E8EEF4] tracking-tight">
             Planeta Azul
           </h1>
-          <p className="text-[#4A5C6A] text-sm mt-1 font-mono">SISTEMA DE GESTÃO INDUSTRIAL</p>
+          <p className="text-[#4A5C6A] text-sm mt-1 font-mono">SISTEMA DE GESTIÓN INDUSTRIAL</p>
         </div>
 
         {/* Card */}
         <div className="card card-accent p-7 shadow-accent">
           <h2 className="font-display text-lg font-semibold text-[#E8EEF4] mb-6">
-            Entrar no sistema
+            Iniciar sesión en el sistema
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-mono text-[#7D95A8] uppercase tracking-widest mb-1.5">
-                E-mail
+                Correo electrónico
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="seu@email.com"
+                placeholder="tu@email.com"
                 required
                 className="w-full bg-[#0D1620] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-[#E8EEF4] placeholder-[#4A5C6A] outline-none focus:border-brand-cyan/50 focus:shadow-[0_0_0_3px_rgba(0,212,255,0.08)] transition-all"
               />
@@ -66,7 +66,7 @@ export default function LoginPage() {
 
             <div>
               <label className="block text-xs font-mono text-[#7D95A8] uppercase tracking-widest mb-1.5">
-                Senha
+                Contraseña
               </label>
               <input
                 type="password"
@@ -89,19 +89,19 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-brand-cyan text-[#080D12] font-display font-semibold text-sm rounded-lg py-2.5 mt-2 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-accent"
             >
-              {loading ? 'Autenticando...' : 'Entrar'}
+              {loading ? 'Autenticando...' : 'Iniciar sesión'}
             </button>
           </form>
 
           {/* Dev hint */}
           <div className="mt-6 pt-5 border-t border-white/5">
-            <p className="text-[#4A5C6A] text-xs font-mono mb-2">DEV — credenciais de teste:</p>
+            <p className="text-[#4A5C6A] text-xs font-mono mb-2">DEV — credenciales de prueba:</p>
             <div className="space-y-1">
               {[
                 ['admin@planetaazul.com', 'admin123', 'Admin'],
-                ['chefe@planetaazul.com', 'chefe123', 'Chefe Área'],
+                ['chefe@planetaazul.com', 'chefe123', 'Jefe de Área'],
                 ['sup@planetaazul.com',   'sup123',   'Supervisor'],
-                ['membro@planetaazul.com','membro123','Membro'],
+                ['membro@planetaazul.com','membro123','Miembro'],
               ].map(([e, p, label]) => (
                 <button
                   key={e}

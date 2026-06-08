@@ -27,7 +27,7 @@ func RequireAuth(authSvc *auth.Service) gin.HandlerFunc {
 
 		claims, err := authSvc.ValidateAccessToken(tokenStr)
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token inválido ou expirado"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "token inválido o expirado"})
 			return
 		}
 
@@ -49,7 +49,7 @@ func RequireRoles(roles ...models.UserRole) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		role, _ := c.Get(ContextRole)
 		if !allowed[role.(string)] {
-			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "permissão insuficiente"})
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "permisos insuficientes"})
 			return
 		}
 		c.Next()
@@ -72,7 +72,7 @@ func RequireMinRole(minRole models.UserRole) gin.HandlerFunc {
 		roleStr, _ := c.Get(ContextRole)
 		level := hierarchy[models.UserRole(roleStr.(string))]
 		if level < minLevel {
-			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "permissão insuficiente"})
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "permisos insuficientes"})
 			return
 		}
 		c.Next()

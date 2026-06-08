@@ -88,25 +88,25 @@ export interface LoginResponse {
 
 // Display helpers
 export const STATUS_LABELS: Record<ItemStatus, string> = {
-  draft:       'Rascunho',
-  pending:     'Pendente',
-  in_progress: 'Em Andamento',
-  waiting:     'Aguardando',
-  done:        'Concluído',
-  rejected:    'Rejeitado',
+  draft:       'Borrador',
+  pending:     'Pendiente',
+  in_progress: 'En Progreso',
+  waiting:     'En Espera',
+  done:        'Completado',
+  rejected:    'Rechazado',
 }
 
 export const PRIORITY_LABELS: Record<ItemPriority, string> = {
-  low:    'Baixa',
-  medium: 'Média',
+  low:    'Baja',
+  medium: 'Media',
   high:   'Alta',
   urgent: 'Urgente',
 }
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   admin:       'Administrador',
-  chefe_geral: 'Chefe Geral',
-  chefe_area:  'Chefe de Área',
+  chefe_geral: 'Jefe General',
+  chefe_area:  'Jefe de Área',
   supervisor:  'Supervisor',
-  membro:      'Membro',
+  membro:      'Miembro',
 }

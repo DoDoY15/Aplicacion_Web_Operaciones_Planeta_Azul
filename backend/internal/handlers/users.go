@@ -36,7 +36,7 @@ func (h *UserHandler) Get(c *gin.Context) {
 
 	user, err := h.store.GetUserByID(id)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "usuário não encontrado"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "usuario no encontrado"})
 		return
 	}
 

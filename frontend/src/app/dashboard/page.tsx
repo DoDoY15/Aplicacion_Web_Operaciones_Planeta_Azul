@@ -51,10 +51,10 @@ export default function DashboardPage() {
       {/* Stats row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total de Items', value: stats.total, icon: ListTodo, color: 'text-brand-cyan' },
-          { label: 'Em Andamento',   value: stats.in_progress, icon: TrendingUp, color: 'text-[#60A5FA]' },
-          { label: 'Pendentes',      value: stats.pending, icon: Clock, color: 'text-[#FCD34D]' },
-          { label: 'Alta Prioridade',value: stats.urgent, icon: AlertTriangle, color: 'text-[#F87171]' },
+          { label: 'Total de Ítems', value: stats.total, icon: ListTodo, color: 'text-brand-cyan' },
+          { label: 'En Progreso',    value: stats.in_progress, icon: TrendingUp, color: 'text-[#60A5FA]' },
+          { label: 'Pendientes',     value: stats.pending, icon: Clock, color: 'text-[#FCD34D]' },
+          { label: 'Alta Prioridad', value: stats.urgent, icon: AlertTriangle, color: 'text-[#F87171]' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="card card-accent p-5">
             <div className="flex items-start justify-between">
@@ -75,15 +75,15 @@ export default function DashboardPage() {
         {/* Recent items */}
         <div className="card col-span-2 p-0 overflow-hidden">
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.06]">
-            <h2 className="font-display font-semibold text-sm text-[#E8EEF4]">Atividade Recente</h2>
-            <Link href="/tasks" className="text-brand-cyan text-xs font-mono hover:underline">Ver tudo →</Link>
+            <h2 className="font-display font-semibold text-sm text-[#E8EEF4]">Actividad Reciente</h2>
+            <Link href="/tasks" className="text-brand-cyan text-xs font-mono hover:underline">Ver todo →</Link>
           </div>
           {loading ? (
             <div className="p-8 flex justify-center">
               <div className="w-5 h-5 border-2 border-brand-cyan/40 border-t-brand-cyan rounded-full animate-spin" />
             </div>
           ) : recent.length === 0 ? (
-            <div className="p-8 text-center text-[#4A5C6A] text-sm">Nenhum item ainda.</div>
+            <div className="p-8 text-center text-[#4A5C6A] text-sm">Todavía no hay ítems.</div>
           ) : (
             <div className="divide-y divide-white/[0.04]">
               {recent.map(item => (
@@ -97,7 +97,7 @@ export default function DashboardPage() {
                     <p className="text-sm text-[#E8EEF4] truncate group-hover:text-brand-cyan transition-colors">{item.title}</p>
                     {item.deadline && (
                       <p className="text-[11px] text-[#4A5C6A] font-mono mt-0.5">
-                        prazo: {new Date(item.deadline).toLocaleDateString('pt-BR')}
+                        vence: {new Date(item.deadline).toLocaleDateString('es')}
                       </p>
                     )}
                   </div>
@@ -112,7 +112,7 @@ export default function DashboardPage() {
 
         {/* Status summary */}
         <div className="card p-5">
-          <h2 className="font-display font-semibold text-sm text-[#E8EEF4] mb-4">Por Status</h2>
+          <h2 className="font-display font-semibold text-sm text-[#E8EEF4] mb-4">Por Estado</h2>
           <div className="space-y-3">
             {Object.entries(STATUS_LABELS).map(([status, label]) => {
               const count = items.filter(i => i.status === status).length

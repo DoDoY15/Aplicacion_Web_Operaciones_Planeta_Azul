@@ -1,6 +1,6 @@
 'use client'
 export default function DataPage() {
-  return <Placeholder label="Dados & KPIs" desc="Módulo 3 — KPIs e exportações do banco da fábrica" />
+  return <Placeholder label="Datos y KPIs" desc="Módulo 3 — KPIs y exportaciones de la base de datos de la fábrica" />
 }
 function Placeholder({ label, desc }: { label: string; desc: string }) {
   return (

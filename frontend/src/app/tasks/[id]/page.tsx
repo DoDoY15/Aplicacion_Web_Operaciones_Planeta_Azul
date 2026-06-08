@@ -24,9 +24,9 @@ const NEXT_STATUS: Record<string, string> = {
 }
 
 const NEXT_LABEL: Record<string, string> = {
-  draft:       'Submeter',
+  draft:       'Enviar',
   pending:     'Iniciar',
-  in_progress: 'Concluir',
+  in_progress: 'Finalizar',
 }
 
 export default function TaskDetailPage() {
@@ -81,7 +81,7 @@ export default function TaskDetailPage() {
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm text-[#4A5C6A]">
         <Link href="/tasks" className="hover:text-brand-cyan transition-colors flex items-center gap-1">
-          <ArrowLeft size={13} /> Tasks
+          <ArrowLeft size={13} /> Tareas
         </Link>
         <ChevronRight size={12} />
         <span className="text-[#7D95A8] truncate max-w-xs">{item.title}</span>
@@ -103,10 +103,10 @@ export default function TaskDetailPage() {
         {/* Meta grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
           {[
-            { label: 'Prioridade', value: PRIORITY_LABELS[item.priority] },
-            { label: 'Visibilidade', value: item.visibility === 'private' ? 'Privado' : item.visibility === 'team' ? 'Equipe' : 'Público' },
-            { label: 'Criado em', value: new Date(item.created_at).toLocaleDateString('pt-BR') },
-            item.deadline ? { label: 'Prazo', value: new Date(item.deadline).toLocaleDateString('pt-BR') } : null,
+            { label: 'Prioridad', value: PRIORITY_LABELS[item.priority] },
+            { label: 'Visibilidad', value: item.visibility === 'private' ? 'Privado' : item.visibility === 'team' ? 'Equipo' : 'Público' },
+            { label: 'Creado el', value: new Date(item.created_at).toLocaleDateString('es') },
+            item.deadline ? { label: 'Fecha límite', value: new Date(item.deadline).toLocaleDateString('es') } : null,
           ].filter(Boolean).map(({ label, value }: any) => (
             <div key={label} className="bg-white/[0.03] rounded-lg px-3 py-2.5 border border-white/[0.05]">
               <p className="text-[#4A5C6A] font-mono uppercase tracking-widest mb-1" style={{ fontSize: 9 }}>{label}</p>
@@ -133,7 +133,7 @@ export default function TaskDetailPage() {
         <div className="card p-0 overflow-hidden">
           <div className="px-5 py-3.5 border-b border-white/[0.06]">
             <h2 className="font-display font-semibold text-sm text-[#E8EEF4]">
-              Sub-items <span className="text-[#4A5C6A] font-normal">({item.children.length})</span>
+              Subítems <span className="text-[#4A5C6A] font-normal">({item.children.length})</span>
             </h2>
           </div>
           <div className="divide-y divide-white/[0.04]">
@@ -154,14 +154,14 @@ export default function TaskDetailPage() {
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/[0.06]">
           <h2 className="font-display font-semibold text-sm text-[#E8EEF4] flex items-center gap-2">
             <MessageSquare size={14} className="text-[#4A5C6A]" />
-            Comentários <span className="text-[#4A5C6A] font-normal">({item.comments?.length ?? 0})</span>
+            Comentarios <span className="text-[#4A5C6A] font-normal">({item.comments?.length ?? 0})</span>
           </h2>
         </div>
 
         {/* Comment list */}
         <div className="divide-y divide-white/[0.04]">
           {(item.comments ?? []).length === 0 ? (
-            <p className="px-5 py-4 text-[#4A5C6A] text-sm">Nenhum comentário ainda.</p>
+            <p className="px-5 py-4 text-[#4A5C6A] text-sm">Todavía no hay comentarios.</p>
           ) : (
             item.comments!.map(c => (
               <div key={c.id} className="px-5 py-4">
@@ -169,8 +169,8 @@ export default function TaskDetailPage() {
                   <div className="w-5 h-5 rounded-full bg-brand-cyan/20 border border-brand-cyan/30 flex items-center justify-center text-brand-cyan text-[9px] font-display font-bold">
                     {c.author?.name?.[0] ?? '?'}
                   </div>
-                  <span className="text-xs text-[#7D95A8] font-medium">{c.author?.name ?? 'Usuário'}</span>
-                  <span className="text-[10px] text-[#4A5C6A] font-mono ml-auto">{new Date(c.created_at).toLocaleString('pt-BR')}</span>
+                  <span className="text-xs text-[#7D95A8] font-medium">{c.author?.name ?? 'Usuario'}</span>
+                  <span className="text-[10px] text-[#4A5C6A] font-mono ml-auto">{new Date(c.created_at).toLocaleString('es')}</span>
                 </div>
                 <p className="text-sm text-[#E8EEF4] leading-relaxed pl-7">{c.content}</p>
               </div>
@@ -184,7 +184,7 @@ export default function TaskDetailPage() {
             value={comment}
             onChange={e => setComment(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && submitComment()}
-            placeholder="Adicionar comentário..."
+            placeholder="Agregar comentario..."
             className="flex-1 bg-[#0D1620] border border-white/[0.07] rounded-lg px-4 py-2 text-sm text-[#E8EEF4] placeholder-[#4A5C6A] outline-none focus:border-brand-cyan/40 transition-colors"
           />
           <button

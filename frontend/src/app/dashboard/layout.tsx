@@ -12,11 +12,11 @@ import { ROLE_LABELS } from '@/types'
 import { Logo } from '@/components/ui/Logo'
 
 const NAV = [
-  { href: '/dashboard',  icon: LayoutDashboard, label: 'Início',       key: 'dashboard' },
-  { href: '/tasks',      icon: ListTodo,        label: 'Tasks',         key: 'tasks' },
-  { href: '/access',     icon: ShieldCheck,     label: 'Acesso',        key: 'access' },
-  { href: '/data',       icon: BarChart2,       label: 'Dados / KPIs',  key: 'data' },
-  { href: '/forms',      icon: FileText,        label: 'Formulários',   key: 'forms' },
+  { href: '/dashboard',  icon: LayoutDashboard, label: 'Inicio',        key: 'dashboard' },
+  { href: '/tasks',      icon: ListTodo,        label: 'Tareas',        key: 'tasks' },
+  { href: '/access',     icon: ShieldCheck,     label: 'Acceso',        key: 'access' },
+  { href: '/data',       icon: BarChart2,       label: 'Datos / KPIs',  key: 'data' },
+  { href: '/forms',      icon: FileText,        label: 'Formularios',   key: 'forms' },
   { href: '/ocr',        icon: ScanSearch,      label: 'Documentos',    key: 'ocr' },
 ]
 
@@ -75,14 +75,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="px-3 pb-4 border-t border-white/[0.06] pt-3 space-y-0.5">
           <Link href="/settings" className="flex items-center gap-3 px-3 py-2 rounded-lg text-[#7D95A8] hover:text-[#E8EEF4] hover:bg-white/[0.04] text-sm transition-all">
             <Settings size={15} />
-            Configurações
+            Configuración
           </Link>
           <button
             onClick={logout}
             className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[#7D95A8] hover:text-red-400 hover:bg-red-500/[0.06] text-sm transition-all"
           >
             <LogOut size={15} />
-            Sair
+            Salir
           </button>
           {/* User pill */}
           <div className="flex items-center gap-2.5 px-3 py-2.5 mt-1 rounded-lg bg-white/[0.03] border border-white/[0.05]">
@@ -103,7 +103,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <header className="h-16 border-b border-white/[0.06] flex items-center justify-between px-6 shrink-0 bg-[#080D12]">
           <div>
             <h1 className="font-display font-semibold text-base text-[#E8EEF4]">
-              {NAV.find(n => pathname === n.href || pathname.startsWith(n.href + '/'))?.label ?? 'Início'}
+              {NAV.find(n => pathname === n.href || pathname.startsWith(n.href + '/'))?.label ?? 'Inicio'}
             </h1>
             {user.area_id && (
               <p className="text-[#4A5C6A] text-xs font-mono mt-0.5">Área: {user.area_id.slice(0, 8)}</p>

@@ -5,8 +5,8 @@ export default function FormsPage() {
       <div className="text-center">
         <div className="w-12 h-12 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center mx-auto mb-4">
           <div className="w-2 h-2 rounded-full bg-brand-cyan" /></div>
-        <h2 className="font-display text-xl font-bold text-[#E8EEF4] mb-2">Formulários</h2>
-        <p className="text-[#4A5C6A] text-sm font-mono">Módulo 4 — builder de formulários e delegação</p>
+        <h2 className="font-display text-xl font-bold text-[#E8EEF4] mb-2">Formularios</h2>
+        <p className="text-[#4A5C6A] text-sm font-mono">Módulo 4 — generador de formularios y delegación</p>
       </div>
     </div>
   )

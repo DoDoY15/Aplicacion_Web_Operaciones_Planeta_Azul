@@ -5,8 +5,8 @@ export default function OcrPage() {
       <div className="text-center">
         <div className="w-12 h-12 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center mx-auto mb-4">
           <div className="w-2 h-2 rounded-full bg-brand-cyan" /></div>
-        <h2 className="font-display text-xl font-bold text-[#E8EEF4] mb-2">Documentos & OCR</h2>
-        <p className="text-[#4A5C6A] text-sm font-mono">Módulo 5 — upload e leitura de documentos</p>
+        <h2 className="font-display text-xl font-bold text-[#E8EEF4] mb-2">Documentos y OCR</h2>
+        <p className="text-[#4A5C6A] text-sm font-mono">Módulo 5 — carga y lectura de documentos</p>
       </div>
     </div>
   )

@@ -32,23 +32,23 @@ func (h *AuthHandler) Login(c *gin.Context) {
 
 	user, err := h.store.GetUserByEmail(req.Email)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "credenciais inválidas"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "credenciales inválidas"})
 		return
 	}
 
 	if !user.IsActive {
-		c.JSON(http.StatusForbidden, gin.H{"error": "conta desativada"})
+		c.JSON(http.StatusForbidden, gin.H{"error": "cuenta desactivada"})
 		return
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "credenciais inválidas"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "credenciales inválidas"})
 		return
 	}
 
 	tokens, err := h.authSvc.GenerateTokenPair(user)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "erro ao gerar tokens"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "error al generar tokens"})
 		return
 	}
 
@@ -81,13 +81,13 @@ func (h *AuthHandler) Refresh(c *gin.Context) {
 
 	user, err := h.store.GetUserByID(userID)
 	if err != nil || !user.IsActive {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuário não encontrado"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "usuario no encontrado"})
 		return
 	}
 
 	tokens, err := h.authSvc.GenerateTokenPair(user)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "erro ao gerar tokens"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "error al generar tokens"})
 		return
 	}
 
@@ -104,7 +104,7 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 	c.SetSameSite(http.SameSiteNoneMode)
 	c.SetCookie("access_token", "", -1, "/", "", true, true)
 	c.SetCookie("refresh_token", "", -1, "/auth/refresh", "", true, true)
-	c.JSON(http.StatusOK, gin.H{"message": "logout realizado"})
+	c.JSON(http.StatusOK, gin.H{"message": "sesión cerrada"})
 }
 
 // GET /auth/me
@@ -118,7 +118,7 @@ func (h *AuthHandler) Me(c *gin.Context) {
 
 	user, err := h.store.GetUserByID(userID)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "usuário não encontrado"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "usuario no encontrado"})
 		return
 	}
 

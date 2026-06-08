@@ -49,7 +49,7 @@ func (h *ItemHandler) Get(c *gin.Context) {
 
 	item, err := h.store.GetItemByID(id)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "item não encontrado"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "ítem no encontrado"})
 		return
 	}
 
@@ -92,7 +92,7 @@ func (h *ItemHandler) Create(c *gin.Context) {
 	}
 
 	if err := h.store.CreateItem(item); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "erro ao criar item"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "error al crear el ítem"})
 		return
 	}
 
@@ -132,7 +132,7 @@ func (h *ItemHandler) Update(c *gin.Context) {
 
 	item, err := h.store.UpdateItem(id, updates)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "item não encontrado"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "ítem no encontrado"})
 		return
 	}
 
@@ -151,11 +151,11 @@ func (h *ItemHandler) Delete(c *gin.Context) {
 	userID, _ := uuid.Parse(userIDStr.(string))
 
 	if err := h.store.SoftDeleteItem(id, userID); err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "item não encontrado"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "ítem no encontrado"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "item removido"})
+	c.JSON(http.StatusOK, gin.H{"message": "ítem eliminado"})
 }
 
 // POST /items/:id/comments
@@ -182,7 +182,7 @@ func (h *ItemHandler) AddComment(c *gin.Context) {
 	}
 
 	if err := h.store.CreateComment(comment); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "erro ao criar comentário"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "error al crear el comentario"})
 		return
 	}
 
@@ -229,7 +229,7 @@ func (h *ItemHandler) CreateInteraction(c *gin.Context) {
 	}
 
 	if err := h.store.CreateInteraction(interaction); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "erro ao criar interação"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "error al crear la interacción"})
 		return
 	}
 

@@ -53,15 +53,15 @@ export default function TasksPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="font-display text-xl font-bold text-[#E8EEF4]">Tasks & Requisições</h1>
-          <p className="text-[#4A5C6A] text-sm mt-0.5">{filtered.length} item{filtered.length !== 1 ? 's' : ''}</p>
+          <h1 className="font-display text-xl font-bold text-[#E8EEF4]">Tareas y Solicitudes</h1>
+          <p className="text-[#4A5C6A] text-sm mt-0.5">{filtered.length} ítem{filtered.length !== 1 ? 's' : ''}</p>
         </div>
         <Link
           href="/tasks/new"
           className="flex items-center gap-2 bg-brand-cyan text-[#080D12] font-display font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white transition-colors shadow-accent"
         >
           <Plus size={14} />
-          Novo Item
+          Nuevo Ítem
         </Link>
       </div>
 
@@ -72,7 +72,7 @@ export default function TasksPage() {
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Buscar items..."
+            placeholder="Buscar ítems..."
             className="w-full bg-[#0D1620] border border-white/[0.07] rounded-lg pl-9 pr-4 py-2 text-sm text-[#E8EEF4] placeholder-[#4A5C6A] outline-none focus:border-brand-cyan/40 transition-colors"
           />
         </div>
@@ -83,7 +83,7 @@ export default function TasksPage() {
             onChange={e => setFilterStatus(e.target.value as ItemStatus | '')}
             className="bg-[#0D1620] border border-white/[0.07] rounded-lg pl-9 pr-8 py-2 text-sm text-[#E8EEF4] outline-none focus:border-brand-cyan/40 transition-colors appearance-none cursor-pointer"
           >
-            <option value="">Todos os status</option>
+            <option value="">Todos los estados</option>
             {ALL_STATUSES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}
           </select>
         </div>
@@ -96,7 +96,7 @@ export default function TasksPage() {
         </div>
       ) : filtered.length === 0 ? (
         <div className="card p-12 text-center">
-          <p className="text-[#4A5C6A]">Nenhum item encontrado.</p>
+          <p className="text-[#4A5C6A]">Ningún ítem encontrado.</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -122,12 +122,12 @@ export default function TasksPage() {
                     <div className="flex items-center gap-3 mt-1">
                       {item.deadline && (
                         <span className="text-[11px] text-[#4A5C6A] font-mono">
-                          prazo {new Date(item.deadline).toLocaleDateString('pt-BR')}
+                          vence {new Date(item.deadline).toLocaleDateString('es')}
                         </span>
                       )}
                       {children.length > 0 && (
                         <span className="text-[11px] text-[#4A5C6A] font-mono">
-                          {children.length} sub-item{children.length !== 1 ? 's' : ''}
+                          {children.length} subítem{children.length !== 1 ? 's' : ''}
                         </span>
                       )}
                       <span className={`text-[11px] font-mono ${PRIORITY_COLORS[item.priority]}`}>
@@ -161,7 +161,7 @@ export default function TasksPage() {
                       </Link>
                     ))}
                     {children.length > 3 && (
-                      <p className="text-[11px] text-[#4A5C6A] pl-4 py-1 font-mono">+{children.length - 3} mais…</p>
+                      <p className="text-[11px] text-[#4A5C6A] pl-4 py-1 font-mono">+{children.length - 3} más…</p>
                     )}
                   </div>
                 )}

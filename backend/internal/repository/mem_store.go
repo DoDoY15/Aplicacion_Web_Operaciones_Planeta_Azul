@@ -39,8 +39,8 @@ func NewMemStore() *MemStore {
 
 func (s *MemStore) seed() {
 	// Areas
-	areaA := &models.Area{ID: uuid.MustParse("11111111-0000-0000-0000-000000000001"), Name: "Produção", Description: "Linha de produção principal", CreatedAt: time.Now()}
-	areaB := &models.Area{ID: uuid.MustParse("11111111-0000-0000-0000-000000000002"), Name: "Manutenção", Description: "Manutenção industrial", CreatedAt: time.Now()}
+	areaA := &models.Area{ID: uuid.MustParse("11111111-0000-0000-0000-000000000001"), Name: "Producción", Description: "Línea de producción principal", CreatedAt: time.Now()}
+	areaB := &models.Area{ID: uuid.MustParse("11111111-0000-0000-0000-000000000002"), Name: "Mantenimiento", Description: "Mantenimiento industrial", CreatedAt: time.Now()}
 	s.areas[areaA.ID] = areaA
 	s.areas[areaB.ID] = areaB
 
@@ -59,8 +59,8 @@ func (s *MemStore) seed() {
 		PasswordHash: string(hashAdmin), Role: models.RoleAdmin, IsActive: true, CreatedAt: time.Now(),
 	}
 	s.users[chefeID] = &models.User{
-		ID: chefeID, Name: "Carlos Mendes", Email: "chefe@planetaazul.com",
-		PasswordHash: string(hashChefe), Role: models.RoleChefArea, Cargo: "Chefe de Produção",
+		ID: chefeID, Name: "Carlos Mendoza", Email: "chefe@planetaazul.com",
+		PasswordHash: string(hashChefe), Role: models.RoleChefArea, Cargo: "Jefe de Producción",
 		AreaID: &areaA.ID, IsActive: true, CreatedAt: time.Now(),
 	}
 	s.users[supID] = &models.User{
@@ -69,7 +69,7 @@ func (s *MemStore) seed() {
 		AreaID: &areaA.ID, IsActive: true, CreatedAt: time.Now(),
 	}
 	s.users[membroID] = &models.User{
-		ID: membroID, Name: "João Silva", Email: "membro@planetaazul.com",
+		ID: membroID, Name: "Juan Silva", Email: "membro@planetaazul.com",
 		PasswordHash: string(hashMembro), Role: models.RoleMembro, Cargo: "Operador",
 		AreaID: &areaA.ID, IsActive: true, CreatedAt: time.Now(),
 	}
@@ -78,7 +78,7 @@ func (s *MemStore) seed() {
 	deadline := time.Now().Add(72 * time.Hour)
 	rootItem := &models.Item{
 		ID: uuid.MustParse("33333333-0000-0000-0000-000000000001"),
-		Title: "Manutenção Preventiva — Linha A", Description: "Revisão completa dos equipamentos da linha A antes da parada de julho.",
+		Title: "Mantenimiento Preventivo — Línea A", Description: "Revisión completa de los equipos de la línea A antes de la parada de julio.",
 		CreatedBy: chefeID, AssignedTo: &supID, AreaID: areaA.ID,
 		Status: models.StatusInProgress, Visibility: models.VisibilityTeam,
 		Priority: models.PriorityHigh, RequiresApproval: false,
@@ -87,14 +87,14 @@ func (s *MemStore) seed() {
 	child1ID := uuid.MustParse("33333333-0000-0000-0000-000000000002")
 	child1 := &models.Item{
 		ID: child1ID, ParentID: &rootItem.ID,
-		Title: "Checar lubrificação dos rolamentos", CreatedBy: supID,
+		Title: "Revisar la lubricación de los rodamientos", CreatedBy: supID,
 		AssignedTo: &membroID, AreaID: areaA.ID,
 		Status: models.StatusDone, Visibility: models.VisibilityTeam,
 		Priority: models.PriorityMedium, CreatedAt: time.Now().Add(-20 * time.Hour), UpdatedAt: time.Now(),
 	}
 	child2 := &models.Item{
 		ID: uuid.MustParse("33333333-0000-0000-0000-000000000003"), ParentID: &rootItem.ID,
-		Title: "Substituir filtros do sistema hidráulico", CreatedBy: supID,
+		Title: "Sustituir los filtros del sistema hidráulico", CreatedBy: supID,
 		AssignedTo: &membroID, AreaID: areaA.ID,
 		Status: models.StatusInProgress, Visibility: models.VisibilityTeam,
 		Priority: models.PriorityHigh, Deadline: &deadline,
@@ -102,7 +102,7 @@ func (s *MemStore) seed() {
 	}
 	item2 := &models.Item{
 		ID: uuid.MustParse("33333333-0000-0000-0000-000000000004"),
-		Title: "Requisição de EPI — Turno da Tarde", Description: "Solicitar reposição de capacetes e luvas para o turno da tarde.",
+		Title: "Solicitud de EPP — Turno de Tarde", Description: "Solicitar reposición de cascos y guantes para el turno de tarde.",
 		CreatedBy: membroID, AssignedTo: &supID, AreaID: areaA.ID,
 		Status: models.StatusPending, Visibility: models.VisibilityTeam,
 		Priority: models.PriorityMedium, RequiresApproval: true,
@@ -110,7 +110,7 @@ func (s *MemStore) seed() {
 	}
 	item3 := &models.Item{
 		ID: uuid.MustParse("33333333-0000-0000-0000-000000000005"),
-		Title: "Relatório de Produção — Semana 23", Description: "Compilar dados de produção da semana 23 para apresentação ao chefe geral.",
+		Title: "Informe de Producción — Semana 23", Description: "Compilar los datos de producción de la semana 23 para la presentación al jefe general.",
 		CreatedBy: chefeID, AreaID: areaA.ID,
 		Status: models.StatusDraft, Visibility: models.VisibilityPrivate,
 		Priority: models.PriorityLow,
@@ -126,7 +126,7 @@ func (s *MemStore) seed() {
 	// Comments
 	comment := &models.Comment{
 		ID: uuid.New(), ItemID: rootItem.ID, UserID: supID,
-		Content: "Iniciei a inspeção visual. Rolamentos da estação 3 com desgaste acima do normal.",
+		Content: "Inicié la inspección visual. Los rodamientos de la estación 3 presentan un desgaste superior al normal.",
 		CreatedAt: time.Now().Add(-12 * time.Hour),
 	}
 	s.comments[comment.ID] = comment
@@ -142,7 +142,7 @@ func (s *MemStore) GetUserByEmail(email string) (*models.User, error) {
 			return u, nil
 		}
 	}
-	return nil, errors.New("usuário não encontrado")
+	return nil, errors.New("usuario no encontrado")
 }
 
 func (s *MemStore) GetUserByID(id uuid.UUID) (*models.User, error) {
@@ -150,7 +150,7 @@ func (s *MemStore) GetUserByID(id uuid.UUID) (*models.User, error) {
 	defer s.mu.RUnlock()
 	u, ok := s.users[id]
 	if !ok {
-		return nil, errors.New("usuário não encontrado")
+		return nil, errors.New("usuario no encontrado")
 	}
 	return u, nil
 }
@@ -172,7 +172,7 @@ func (s *MemStore) GetItemByID(id uuid.UUID) (*models.Item, error) {
 	defer s.mu.RUnlock()
 	item, ok := s.items[id]
 	if !ok || item.DeletedAt != nil {
-		return nil, errors.New("item não encontrado")
+		return nil, errors.New("ítem no encontrado")
 	}
 	return item, nil
 }
@@ -221,7 +221,7 @@ func (s *MemStore) UpdateItem(id uuid.UUID, updates map[string]interface{}) (*mo
 	defer s.mu.Unlock()
 	item, ok := s.items[id]
 	if !ok || item.DeletedAt != nil {
-		return nil, errors.New("item não encontrado")
+		return nil, errors.New("ítem no encontrado")
 	}
 	if v, ok := updates["title"]; ok {
 		item.Title = v.(string)
@@ -248,7 +248,7 @@ func (s *MemStore) SoftDeleteItem(id uuid.UUID, deletedBy uuid.UUID) error {
 	defer s.mu.Unlock()
 	item, ok := s.items[id]
 	if !ok {
-		return errors.New("item não encontrado")
+		return errors.New("ítem no encontrado")
 	}
 	now := time.Now()
 	item.DeletedAt = &now
@@ -308,7 +308,7 @@ func (s *MemStore) ResolveInteraction(id uuid.UUID, response string) error {
 	defer s.mu.Unlock()
 	i, ok := s.interactions[id]
 	if !ok {
-		return errors.New("interação não encontrada")
+		return errors.New("interacción no encontrada")
 	}
 	now := time.Now()
 	i.Response = response
