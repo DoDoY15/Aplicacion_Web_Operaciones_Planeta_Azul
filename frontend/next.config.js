@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const { withNextOnPages } = require('@cloudflare/next-on-pages/next-config')
-
 const nextConfig = {
   async rewrites() {
     if (process.env.NODE_ENV !== 'development') return []
@@ -11,4 +9,4 @@ const nextConfig = {
   },
 }
 
-module.exports = withNextOnPages(nextConfig)
+module.exports = nextConfig
